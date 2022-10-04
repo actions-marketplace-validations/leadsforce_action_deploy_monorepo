@@ -56,6 +56,7 @@ runs:
           NPM_TOKEN=${{ inputs.token }}
     -
       name: Setup k8s context
+      shell: bash
       run: |
         mkdir -p ~/.kube
         echo "${{ inputs.kubeconfig }}" >> ~/.kube/config
@@ -67,7 +68,9 @@ runs:
       uses: actions/checkout@v3
       with:
         ref: ${{ inputs.tag }}
-    - name: Deploy to k8s cluster
+    -
+      name: Deploy to k8s cluster
+      shell: bash
       run: |
         APP_NAME=$(echo ${{ inputs.folder }} | tr '_' '-')
         APP_NS=$(echo "${{ inputs.repo }}" | tr '_' '-')
