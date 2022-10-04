@@ -49,7 +49,7 @@ runs:
       with:
         push: true
         context: "{{defaultContext}}:${{ inputs.folder }}"
-        tags: ghcr.io/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs:tag }}
+        tags: ghcr.io/${{ github.repository_owner }}/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs:tag }}
         cache-from: type=registry,ref=${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs.tag }}
         cache-to: type=inline
         build-args: |
@@ -71,7 +71,7 @@ runs:
       run: |
         APP_NAME=$(echo ${{ inputs.folder }} | tr '_' '-')
         APP_NS=$(echo "${{ inputs.repo }}" | tr '_' '-')
-        DOCKER_REPO="ghcr.io/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs:tag }}"
+        DOCKER_REPO="ghcr.io/${{ github.repository_owner }}/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs:tag }}"
         helm upgrade --install $APP_NAME ${{ inputs.folder }}/platform/chart/ \
         --create-namespace \
         -n $APP_NS-${{ inputs.tag }} \
