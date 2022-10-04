@@ -48,9 +48,8 @@ runs:
         mkdir -p ~/.kube
         echo "${{ inputs.kubeconfig }}" >> ~/.kube/config
         chmod 600 ~/.kube/config
-    -
-      name: Install helm
-      uses: azure/setup-helm@v3
+    - uses: azure/setup-kubectl@v3
+    - uses: azure/setup-helm@v3
     -
       uses: actions/checkout@v3
       with:
@@ -63,8 +62,6 @@ runs:
         APP_NS=$(echo "${{ inputs.repo }}" | tr '_' '-')
         DOCKER_REPO="ghcr.io/${{ github.repository_owner }}/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs.tag }}"
         helm upgrade --install $APP_NAME ${{ inputs.folder }}/platform/chart/ \
-        --create-namespace \
-        -n $APP_NS-${{ inputs.tag }} \
         --set image.repository="$DOCKER_REPO" \
         --set image.tag="${{ inputs.tag }}" \
         \
