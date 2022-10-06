@@ -68,8 +68,7 @@ runs:
         -n $NS \
         --set image.repository="$DOCKER_REPO" \
         --set image.tag="${{ inputs.tag }}" \
-        ${{ inputs.envs }} \
         --set registries[0].name="github-registry-secret" \
         --set registries[0].key="${{ inputs.ghcr_secret }}" \
-        \
         --set-string nodeSelector."lke\\.linode\\.com/pool-id"="${{ inputs.pool_id }}" \
+        ${{ inputs.envs }}
