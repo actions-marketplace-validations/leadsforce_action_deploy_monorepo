@@ -65,7 +65,7 @@ runs:
         kubectl label namespace nats istio-injection=enabled --overwrite || echo "Already labeled"
         DOCKER_REPO="ghcr.io/${{ github.repository_owner }}/${{ inputs.repo }}_${{ inputs.folder }}:${{ inputs.tag }}"
         helm upgrade --install $APP_NAME ${{ inputs.folder }}/platform/chart/ \
-        -n $NS
+        -n $NS \
         --set image.repository="$DOCKER_REPO" \
         --set image.tag="${{ inputs.tag }}" \
         ${{ inputs.envs }} \
