@@ -55,10 +55,6 @@ runs:
       with:
         ref: ${{ inputs.tag }}
     -
-      uses: actions-hub/kubectl@master
-      env:
-        KUBE_CONFIG: ${{ inputs.kubeconfig }}
-    -
       name: Deploy to k8s cluster
       shell: bash
       run: |
