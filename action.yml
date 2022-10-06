@@ -65,9 +65,7 @@ runs:
         --set namespace="$APP_NS-${{ inputs.tag }}" \
         --set image.repository="$DOCKER_REPO" \
         --set image.tag="${{ inputs.tag }}" \
-        \
-        ${{ inputs.envs }}
-        \
+        \ ${{ inputs.envs }} \
         --set registries[0].name="github-registry-secret" \
         --set registries[0].key="${{ inputs.ghcr_secret }}" \
         \
