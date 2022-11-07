@@ -72,5 +72,5 @@ runs:
         --set image.tag="${{ inputs.tag }}" \
         --set registries[0].name="github-registry-secret" \
         --set registries[0].key="${{ inputs.ghcr_secret }}" \
-        --set-string nodeSelector."lke\\.linode\\.com/pool-id"="${{ inputs.pool_id }}" \
+        --set-string nodeSelector."docs\\.digitalocean\\.com/node-pool"="${{ inputs.pool_id }}" \
         ${{ inputs.envs }}
